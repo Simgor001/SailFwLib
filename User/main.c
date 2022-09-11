@@ -1,50 +1,42 @@
 #include "sl_config.h"
 
-sl_isr_state(Time0, Vector_TIM0);
+sl_isr_state(Time0, IRQ_TIM0);
 
-sl_isr_def(Time0, Vector_TIM0)
+sl_isr_def(Time0, IRQ_TIM0)
 {
-    sl_gpio_toggle(GPIO_P1, GPIO_Pin_1);
+    sl_gpio_toggle(GPIO_P1,GPIO_Pin_1);
 }
 
 void delay(uint16_t i)
 {
-
     while (i--)
         ;
 }
 void main()
 {
     gpio_config_t config;
+    config.speed = GPIO_Speed_Fast;
+    config.driver = GPIO_Driver_Plus;
+
     sl_sys_init();
-    
-    config.mode    = GPIO_Mode_Out_PP,
-    config.pull_up = GPIO_Pull_up_Disable,
-    config.smit    = GPIO_Smit_Disable,
-    config.speed   = GPIO_Speed_Fast,
-    config.driver  = GPIO_Driver_Plus,
-    config.digit   = GPIO_Digit_Disable;
 
-    sl_gpio_config(GPIO_P1, GPIO_Pin_1, config);
+    sl_gpio_init(GPIO_P1, GPIO_Pin_1, GPIO_Mode_Out_PP);
 
-    TH0 = (65536 - 1000) / 256;
-    TL0 = (65536 - 1000) % 256;
+    sl_gpio_config(GPIO_P1,GPIO_Pin_2,config)
 
-    TMOD = 0X01;
-    TR0  = 1;
+    sl_tim_init(TIM_0,GATE_Disable,CT_Timer,TIM_Mode_16_Auto);
+
+    // sl_tim_load(TIM_0,10);
+    TH0 = (65536 - 10) / 256;
+    TL0 = (65536 - 10) % 256;
+    // sl_tim_enable(TIM_0);
+    TR0 = 1;
 
     EA  = 1;
     ET0 = 1;
 
-    IT1 = 1;
-    EX1 = 1;
 
-    // while (1)
-    // {
-    //     sl_gpio_toggle(GPIO_P1, GPIO_Pin_1);
-    //     delay(10);
-    // }
-    while (1)
+        while (1)
     {
         /* code */
     }

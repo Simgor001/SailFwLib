@@ -1,0 +1,192 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    09/11/2022  21:46:48  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+D:\KEIL_V5-C51\C51\BIN\BL51.EXE .\build\Debug\main.obj, .\build\Debug\gpio.obj, .\build\Debug\sys.obj TO .\build\Debug\S
+>> ailML PRINT (.\Listings\SailML.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\build\Debug\main.obj (MAIN)
+  .\build\Debug\gpio.obj (GPIO)
+  .\build\Debug\sys.obj (SYS)
+  D:\KEIL_V5-C51\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\build\Debug\SailML (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0005H     UNIT         _DATA_GROUP_
+            IDATA   000DH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     07F2H                  *** GAP ***
+            CODE    0800H     0092H     UNIT         ?PR?MAIN?MAIN
+            CODE    0892H     0023H     UNIT         ?PR?SL_SYS_INIT?SYS
+            CODE    08B5H     000CH     UNIT         ?C_C51STARTUP
+            CODE    08C1H     000BH     UNIT         ?PR?_DELAY?MAIN
+            CODE    08CCH     0003H     UNIT         ?PR?TIME0?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   .\build\Debug\SailML (MAIN)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN                  0008H    0005H
+  +--> ?PR?SL_SYS_INIT?SYS
+
+
+
+SYMBOL TABLE OF MODULE:  .\build\Debug\SailML (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  09/11/2022  21:46:48  PAGE 2
+
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0092H         PUBLIC        P1M0
+  D:0091H         PUBLIC        P1M1
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00C0H         PUBLIC        P4
+  D:00C8H         PUBLIC        P5
+  D:00E8H         PUBLIC        P6
+  B:00A8H.7       PUBLIC        EA
+  D:00F8H         PUBLIC        P7
+  D:00A8H         PUBLIC        IE
+  C:08C1H         PUBLIC        _delay
+  D:00B8H         PUBLIC        IP
+  C:0800H         PUBLIC        main
+  B:0090H.1       PUBLIC        P11
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  C:08CCH         PUBLIC        Time0
+  B:00A8H.1       PUBLIC        ET0
+  D:008CH         PUBLIC        TH0
+  B:00A8H.0       PUBLIC        EX0
+  B:0088H.0       PUBLIC        IT0
+  D:008AH         PUBLIC        TL0
+  B:0088H.4       PUBLIC        TR0
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          TIME0
+  C:08CCH         LINE#         5
+  C:08CCH         LINE#         7
+  C:08CEH         LINE#         8
+  -------         ENDPROC       TIME0
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        i
+  C:08C1H         LINE#         10
+  C:08C1H         LINE#         11
+  C:08C1H         LINE#         12
+  C:08CBH         LINE#         14
+  -------         ENDPROC       _DELAY
+  -------         PROC          MAIN
+  -------         DO            
+  D:0008H         SYMBOL        config
+  -------         ENDDO         
+  C:0800H         LINE#         15
+  C:0800H         LINE#         16
+  C:0800H         LINE#         18
+  C:0803H         LINE#         20
+  C:080EH         LINE#         26
+  C:0817H         LINE#         27
+  C:087BH         LINE#         29
+  C:087EH         LINE#         30
+  C:0881H         LINE#         32
+  C:0884H         LINE#         33
+  C:0886H         LINE#         35
+  C:0888H         LINE#         36
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  09/11/2022  21:46:48  PAGE 3
+
+
+  C:088AH         LINE#         38
+  C:088CH         LINE#         39
+  C:0890H         LINE#         41
+  C:0890H         LINE#         42
+  C:0890H         LINE#         44
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        GPIO
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00C0H         PUBLIC        P4
+  D:00C8H         PUBLIC        P5
+  D:00E8H         PUBLIC        P6
+  D:00F8H         PUBLIC        P7
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00D0H         PUBLIC        PSW
+  -------         ENDMOD        GPIO
+
+  -------         MODULE        SYS
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00C0H         PUBLIC        P4
+  D:00C8H         PUBLIC        P5
+  D:00E8H         PUBLIC        P6
+  D:00F8H         PUBLIC        P7
+  D:00BAH         PUBLIC        P_SW2
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:0892H         PUBLIC        sl_sys_init
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          SL_SYS_INIT
+  C:0892H         LINE#         7
+  C:0892H         LINE#         8
+  C:0892H         LINE#         9
+  C:0895H         LINE#         13
+  C:089AH         LINE#         14
+  C:08A1H         LINE#         16
+  C:08A8H         LINE#         40
+  C:08ADH         LINE#         43
+  C:08B2H         LINE#         45
+  C:08B4H         LINE#         46
+  -------         ENDPROC       SL_SYS_INIT
+  -------         ENDMOD        SYS
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  09/11/2022  21:46:48  PAGE 4
+
+
+    SEGMENT: ?PR?_DELAY?MAIN
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00C6H BYTE ( 9%) *
+******************************************************************************
+
+Program Size: data=14.0 xdata=0 code=213
+LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)

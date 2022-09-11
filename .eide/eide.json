@@ -43,7 +43,8 @@
         "incList": [
           "SailFwLib",
           "SailFwLib/inc",
-          "User"
+          "User",
+          "SailFwLib/lib/STC8H"
         ],
         "libList": [],
         "sourceDirList": [],

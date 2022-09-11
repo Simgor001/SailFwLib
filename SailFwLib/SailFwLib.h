@@ -38,8 +38,9 @@
 #error MCU information is not configured correctly!
 #endif
 
-#include "inc\type.h"
-#include "inc\sys.h"
-#include "inc\gpio.h"
-#include "inc\isr.h"
+#include "type.h"
+#include "sys.h"
+#include "gpio.h"
+#include "isr.h"
+#include "tim.h"
 #endif

@@ -1,0 +1,75 @@
+C51 COMPILER V9.60.0.0   SYS                                                               09/11/2022 21:46:48 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE SYS
+OBJECT MODULE PLACED IN .\build\Debug\sys.obj
+COMPILER INVOKED BY: D:\Keil_v5-C51\C51\BIN\C51.EXE SailFwLib\src\STC8H\sys.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\S
+                    -ailFwLib;.\SailFwLib\src\STC8H;.\SailFwLib\inc;.\SailFwLib\lib) DEBUG OBJECTEXTEND PRINT(.\Listings\sys.lst) OBJECT(.\bu
+                    -ild\Debug\sys.obj)
+
+line level    source
+
+   1          /****************************************************************
+   2           * @file    sys.c
+   3           * @author  Simgor001
+   4           ****************************************************************/
+   5          #include "sys.h"
+*** MESSAGE C286 IN LINE 234 OF \Project-C51\SailML\SailFwLib\inc\gpio.h: abc
+   6          #ifdef __SL_STC8H__
+   7          void sl_sys_init()
+   8          {
+   9   1          P_SW2 |= 80;    //使能访问XFR
+  10   1      
+  11   1          //配置系统时钟
+  12   1      #if defined(SYS_CLK_IRC) //内部IRC时钟
+  13   1          CLKSEL = 0;
+  14   1          HIRCCR |= 0x80;
+  15   1          //等待振荡稳定
+  16   1          while (!(HIRCCR & 0x01))
+  17   1              ;
+  18   1      #elif defined(SYS_CLK_XTAL)    //外部晶振
+                  CLKSEL = 1;
+                  XOSCCR |= 0x80;
+                  //等待振荡稳定
+                  while (!(XOSCCR & 0x01))
+                      ;
+                  //选择时钟源
+                  XOSCCR |= SYS_CLK_XTAL << 6;
+              #elif defined(SYS_CLK_IRC_32)  //内部32k IRC时钟
+                  CLKSEL = 2;
+                  IRC32KCR |= 0x80;
+                  //等待振荡稳定
+                  while (!(IRC32KCR & 0x01))
+                      ;
+              #elif defined(SYS_CLK_XTAL_32) //外部32k 晶振
+                  CLKSEL = 3;
+                  X32KCR |= 0x80;
+                  //等待振荡稳定
+                  while (!(X32KCR & 0x01))
+                      ;
+              #endif
+  39   1          //配置系统分频
+  40   1          CLKDIV = SYS_CLK_DIV;
+  41   1      
+  42   1          //系统时钟输出分频
+  43   1          MCLKOCR |= SYS_CLK_OUT_DIV;
+  44   1          //系统时钟输出引脚
+  45   1          MCLKOCR |= SYS_CLK_OUT_PIN << 7;
+  46   1      }
+  47          #endif
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     35    ----
+   CONSTANT SIZE    =   ----    ----
+C51 COMPILER V9.60.0.0   SYS                                                               09/11/2022 21:46:48 PAGE 2   
+
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

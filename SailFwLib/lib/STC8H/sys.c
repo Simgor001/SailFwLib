@@ -2,9 +2,8 @@
  * @file    sys.c
  * @author  Simgor001
  ****************************************************************/
-#define __STC8H_SL__
-#ifdef __STC8H_SL__
 #include "sys.h"
+#ifdef __SL_STC8H__
 void sl_sys_init()
 {
     P_SW2 |= 80;    //使能访问XFR
