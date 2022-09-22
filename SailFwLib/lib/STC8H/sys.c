@@ -6,7 +6,7 @@
 #ifdef __SL_STC8H__
 void sl_sys_init()
 {
-    P_SW2 |= 80;    //使能访问XFR
+    P_SW2 |= 80; //使能访问XFR
 
     //配置系统时钟
 #if defined(SYS_CLK_IRC) //内部IRC时钟
@@ -43,5 +43,17 @@ void sl_sys_init()
     MCLKOCR |= SYS_CLK_OUT_DIV;
     //系统时钟输出引脚
     MCLKOCR |= SYS_CLK_OUT_PIN << 7;
+
+    //打开总中断
+    EA = 1;
+}
+
+int getchar(void)
+{
+    return 0;
+}
+int putchar(int a)
+{
+    return ADCTIM;
 }
 #endif

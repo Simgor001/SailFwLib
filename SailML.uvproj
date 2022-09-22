@@ -411,55 +411,30 @@
               <FileType>5</FileType>
               <FilePath>.\SailFwLib\sl_stc8h.h</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>STC8H</GroupName>
-          <Files>
-            <File>
-              <FileName>gpio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\SailFwLib\src\STC8H\gpio.c</FilePath>
-            </File>
-            <File>
-              <FileName>sys.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\SailFwLib\src\STC8H\sys.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>inc</GroupName>
-          <Files>
-            <File>
-              <FileName>stc8h.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\SailFwLib\lib\stc8h.h</FilePath>
-            </File>
             <File>
               <FileName>gpio.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\SailFwLib\inc\gpio.h</FilePath>
+              <FilePath>.\SailFwLib\lib\STC8H\gpio.h</FilePath>
             </File>
             <File>
               <FileName>isr.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\SailFwLib\inc\isr.h</FilePath>
+              <FilePath>.\SailFwLib\lib\STC8H\isr.h</FilePath>
             </File>
             <File>
-              <FileName>README</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\SailFwLib\inc\README</FilePath>
+              <FileName>sys.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SailFwLib\lib\STC8H\sys.c</FilePath>
             </File>
             <File>
               <FileName>sys.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\SailFwLib\inc\sys.h</FilePath>
+              <FilePath>.\SailFwLib\lib\STC8H\sys.h</FilePath>
             </File>
             <File>
-              <FileName>type.h</FileName>
+              <FileName>tim.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\SailFwLib\inc\type.h</FilePath>
+              <FilePath>.\SailFwLib\lib\STC8H\tim.h</FilePath>
             </File>
           </Files>
         </Group>

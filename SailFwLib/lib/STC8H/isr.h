@@ -1,6 +1,6 @@
 #ifndef __SL_ISR_H__
 #define __SL_ISR_H__
-#include "type.h"
+#include "sl_type.h"
 #include "sl_config.h"
 
 /*
@@ -70,9 +70,9 @@
 
 #define _INT_0_IT(x) (IT0 = x)
 #define _INT_1_IT(x) (IT1 = x）
-#define _INT_2_IT(x) ;
-#define _INT_3_IT(x) ;
-#define _INT_4_IT(x) ;
+#define _INT_2_IT(x) sl_log(LOG_WARN, "The INT2 cannot set IT flag! ")
+#define _INT_3_IT(x) sl_log(LOG_WARN, "The INT3 cannot set IT flag! ")
+#define _INT_4_IT(x) sl_log(LOG_WARN, "The INT4 cannot set IT flag! ")
 
 #define _INT_0_EN    (EX0 = 1)
 #define _INT_1_EN    (EX1 = 1)
@@ -111,5 +111,15 @@
     }
 
 #define sl_isr_exti_disable(INT_x) _##INT_x##_DIS;
+
+/**
+ * @brief 开启总中断
+ */
+#define sl_isr_enable() EA = 1
+
+/**
+ * @brief 关闭总中断
+ */
+#define sl_isr_disable() EA = 0
 
 #endif // !__SL_ISR_H__

@@ -1,6 +1,6 @@
 #ifndef __SL_GPIO_H__
 #define __SL_GPIO_H__
-#include "type.h"
+#include "sl_type.h"
 #include "sl_config.h"
 
 #define GPIO_P0              P0 /* P0端口*/
@@ -12,25 +12,25 @@
 #define GPIO_P6              P6 /* P6端口*/
 #define GPIO_P7              P7 /* P7端口*/
 
-#define GPIO_Pin_0           0 /*引脚 0*/
-#define GPIO_Pin_1           1 /*引脚 1*/
-#define GPIO_Pin_2           2 /*引脚 2*/
-#define GPIO_Pin_3           3 /*引脚 3*/
-#define GPIO_Pin_4           4 /*引脚 4*/
-#define GPIO_Pin_5           5 /*引脚 5*/
-#define GPIO_Pin_6           6 /*引脚 6*/
-#define GPIO_Pin_7           7 /*引脚 7*/
-#define GPIO_Pin_All         8 /*所有引脚*/
+#define GPIO_Pin_0           0x01 /*引脚 0*/
+#define GPIO_Pin_1           0x02 /*引脚 1*/
+#define GPIO_Pin_2           0x04 /*引脚 2*/
+#define GPIO_Pin_3           0x08 /*引脚 3*/
+#define GPIO_Pin_4           0x10 /*引脚 4*/
+#define GPIO_Pin_5           0x20 /*引脚 5*/
+#define GPIO_Pin_6           0x40 /*引脚 6*/
+#define GPIO_Pin_7           0x80 /*引脚 7*/
+#define GPIO_Pin_All         0xFF /*所有引脚*/
 
-#define _GPIO_Pin_0_Mask     0x01 /*引脚 0掩码*/
-#define _GPIO_Pin_1_Mask     0x02 /*引脚 1掩码*/
-#define _GPIO_Pin_2_Mask     0x04 /*引脚 2掩码*/
-#define _GPIO_Pin_3_Mask     0x08 /*引脚 3掩码*/
-#define _GPIO_Pin_4_Mask     0x10 /*引脚 4掩码*/
-#define _GPIO_Pin_5_Mask     0x20 /*引脚 5掩码*/
-#define _GPIO_Pin_6_Mask     0x40 /*引脚 6掩码*/
-#define _GPIO_Pin_7_Mask     0x80 /*引脚 7掩码*/
-#define _GPIO_Pin_All_Mask   0xFF /*所有引脚掩码*/
+#define _GPIO_Pin_0_Num      0 /*引脚 0 编号*/
+#define _GPIO_Pin_1_Num      1 /*引脚 1 编号*/
+#define _GPIO_Pin_2_Num      2 /*引脚 2 编号*/
+#define _GPIO_Pin_3_Num      3 /*引脚 3 编号*/
+#define _GPIO_Pin_4_Num      4 /*引脚 4 编号*/
+#define _GPIO_Pin_5_Num      5 /*引脚 5 编号*/
+#define _GPIO_Pin_6_Num      6 /*引脚 6 编号*/
+#define _GPIO_Pin_7_Num      7 /*引脚 7 编号*/
+#define _GPIO_Pin_All_Num    8 /*所有引脚编号*/
 
 #define _GPIO_P0_GPIO_Pin_0  P00 /* P0.0引脚位号*/
 #define _GPIO_P0_GPIO_Pin_1  P01 /* P0.1引脚位号*/
@@ -202,13 +202,13 @@ typedef struct _gpio_config_s
  * @param GPIO_Pin_x 引脚号x：0~7
  * @param gpio_config 配置结构
  */
-#define sl_gpio_init(GPIO_Px, GPIO_Pin_x, GPIO_Mode_x)     \
-    {                                                      \
-        GPIO_Px##M0 &= ~_##GPIO_Pin_x##_Mask;              \
-        GPIO_Px##M1 &= ~_##GPIO_Pin_x##_Mask;              \
-                                                           \
-        GPIO_Px##M0 |= (GPIO_Mode_x & 0x01) << GPIO_Pin_x; \
-        GPIO_Px##M1 |= (GPIO_Mode_x & 0x02) << GPIO_Pin_x; \
+#define sl_gpio_init(GPIO_Px, GPIO_Pin_x, GPIO_Mode_x)              \
+    {                                                               \
+        GPIO_Px##M0 &= ~(GPIO_Pin_x);                               \
+        GPIO_Px##M1 &= ~(GPIO_Pin_x);                               \
+                                                                    \
+        GPIO_Px##M0 |= (GPIO_Mode_x & 0x01) << _##GPIO_Pin_x##_Num; \
+        GPIO_Px##M1 |= (GPIO_Mode_x & 0x02) << _##GPIO_Pin_x##_Num; \
     }
 /**
  * @brief 配置GPIO
@@ -217,19 +217,19 @@ typedef struct _gpio_config_s
  * @param GPIO_Pin_x 引脚号x：0~7
  * @param gpio_config 配置结构
  */
-#define sl_gpio_config(GPIO_Px, GPIO_Pin_x, gpio_config)  \
-    {                                                     \
-        GPIO_Px##PU &= ~_##GPIO_Pin_x##_Mask;             \
-        GPIO_Px##NCS &= ~_##GPIO_Pin_x##_Mask;            \
-        GPIO_Px##SR &= ~_##GPIO_Pin_x##_Mask;             \
-        GPIO_Px##DR &= ~_##GPIO_Pin_x##_Mask;             \
-        GPIO_Px##IE &= ~_##GPIO_Pin_x##_Mask;             \
-                                                          \
-        GPIO_Px##PU |= gpio_config.pull_up << GPIO_Pin_x; \
-        GPIO_Px##NCS |= gpio_config.smit << GPIO_Pin_x;   \
-        GPIO_Px##SR |= gpio_config.speed << GPIO_Pin_x;   \
-        GPIO_Px##DR |= gpio_config.driver << GPIO_Pin_x;  \
-        GPIO_Px##IE |= gpio_config.digit << GPIO_Pin_x;   \
+#define sl_gpio_config(GPIO_Px, GPIO_Pin_x, gpio_config)           \
+    {                                                              \
+        GPIO_Px##PU &= ~(GPIO_Pin_x);                              \
+        GPIO_Px##NCS &= ~(GPIO_Pin_x);                             \
+        GPIO_Px##SR &= ~(GPIO_Pin_x);                              \
+        GPIO_Px##DR &= ~(GPIO_Pin_x);                              \
+        GPIO_Px##IE &= ~(GPIO_Pin_x);                              \
+                                                                   \
+        GPIO_Px##PU |= gpio_config.pull_up << _##GPIO_Pin_x##_Num; \
+        GPIO_Px##NCS |= gpio_config.smit << _##GPIO_Pin_x##_Num;   \
+        GPIO_Px##SR |= gpio_config.speed << _##GPIO_Pin_x##_Num;   \
+        GPIO_Px##DR |= gpio_config.driver << _##GPIO_Pin_x##_Num;  \
+        GPIO_Px##IE |= gpio_config.digit << _##GPIO_Pin_x##_Num;   \
     }
 
 /**

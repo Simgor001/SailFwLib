@@ -38,9 +38,12 @@
 #error MCU information is not configured correctly!
 #endif
 
-#include "type.h"
+#include "sl_type.h"
+#include "sl_log.h"
+
 #include "sys.h"
 #include "gpio.h"
 #include "isr.h"
 #include "tim.h"
+
 #endif

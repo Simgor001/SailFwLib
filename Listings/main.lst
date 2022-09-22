@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.0.0   MAIN                                                              09/11/2022 21:46:48 PAGE 1   
+C51 COMPILER V9.60.0.0   MAIN                                                              09/13/2022 17:49:05 PAGE 1   
 
 
 C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MAIN
@@ -10,64 +10,49 @@ COMPILER INVOKED BY: D:\Keil_v5-C51\C51\BIN\C51.EXE User\main.c OPTIMIZE(8,SPEED
 line level    source
 
    1          #include "sl_config.h"
-*** MESSAGE C286 IN LINE 234 OF \Project-C51\SailML\SailFwLib\inc\gpio.h: abc
-   2          
-   3          sl_isr_state(Time0, IRQ_TIM0);
+*** WARNING C318 IN LINE 42 OF \Project-C51\SailML\SailFwLib\SailFwLib.h: can't open file 'sys.h'
+*** WARNING C318 IN LINE 43 OF \Project-C51\SailML\SailFwLib\SailFwLib.h: can't open file 'gpio.h'
+*** WARNING C318 IN LINE 44 OF \Project-C51\SailML\SailFwLib\SailFwLib.h: can't open file 'isr.h'
+*** WARNING C318 IN LINE 45 OF \Project-C51\SailML\SailFwLib\SailFwLib.h: can't open file 'tim.h'
+   2          // //声明中断服务
+   3          // sl_isr_state(Time0, IRQ_TIM0);
    4          
-   5          sl_isr_def(Time0, IRQ_TIM0)
-   6          {
-   7   1          sl_gpio_toggle(GPIO_P1, GPIO_Pin_1);
-   8   1      }
-   9          
-  10          void delay(uint16_t i)
-  11          {
-  12   1          while (i--)
-  13   1              ;
-  14   1      }
-  15          void main()
-  16          {
-  17   1          gpio_config_t config;
-  18   1          sl_sys_init();
-  19   1      
-  20   1          config.pull_up = GPIO_Pull_up_Disable,
-  21   1          config.smit    = GPIO_Smit_Disable,
-  22   1          config.speed   = GPIO_Speed_Fast,
-  23   1          config.driver  = GPIO_Driver_Plus,
-  24   1          config.digit   = GPIO_Digit_Disable;
-  25   1      
-  26   1          sl_gpio_init(GPIO_P1, GPIO_Pin_1, GPIO_Mode_Out_PP);
-  27   1          sl_gpio_config(GPIO_P1, GPIO_Pin_1, config);
-  28   1      
-  29   1          TH0 = (65536 - 1000) / 256;
-  30   1          TL0 = (65536 - 1000) % 256;
-  31   1      
-  32   1          TMOD = 0X01;
-  33   1          TR0  = 1;
-  34   1      
-  35   1          EA  = 1;
-  36   1          ET0 = 1;
-  37   1      
-  38   1          sl_isr_exti_config(INT_0, Trig_Fall);
-  39   1          sl_isr_exti_enable(INT_0)
-  40   1      
-  41   1              while (1)
-  42   1          {
-  43   2              /* code */
-  44   2          }
-  45   1      }
+   5          // //定义中断服务
+   6          // sl_isr_def(Time0, IRQ_TIM0)
+   7          // {
+   8          //     //翻转电平
+   9          //     sl_gpio_toggle(GPIO_P1,GPIO_Pin_1);
+  10          // }
+  11          
+  12          void main()
+  13          {
+  14   1          //初始化系统
+  15   1          sl_sys_init();
+*** WARNING C206 IN LINE 15 OF User\main.c: 'sl_sys_init': missing function-prototype
+  16   1      
+  17   1          //初始化GPIO
+  18   1          sl_gpio_init(GPIO_P1, GPIO_Pin_1, GPIO_Mode_Out_PP);
+*** ERROR C202 IN LINE 18 OF User\main.c: 'GPIO_P1': undefined identifier
+  19   1          //初始化定时器
+  20   1          sl_tim_init(TIM_0, GATE_Disable, CT_Timer, TIM_Mode_16_Auto);
+*** ERROR C202 IN LINE 20 OF User\main.c: 'TIM_0': undefined identifier
+  21   1      
+  22   1          //下面的还没完成
+  23   1          // sl_tim_load(TIM_0,10);
+  24   1          // 1个机器周期
+  25   1          // TH0 = (65536 - 1) / 256;
+  26   1          // TL0 = (65536 - 1) % 256;
+  27   1          // // sl_tim_enable(TIM_0);
+  28   1          // TR0 = 1;
+  29   1      
+  30   1          // EA  = 1;
+  31   1          // ET0 = 1;
+  32   1          while (1)
+  33   1          {
+  34   2              P1 ~= P1;
+*** ERROR C141 IN LINE 34 OF User\main.c: syntax error near '~', expected ';'
+*** ERROR C141 IN LINE 34 OF User\main.c: syntax error near '=', expected 'sizeof'
+  35   2          }
+  36   1      }
 
-
-MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    160    ----
-   CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =   ----    ----
-   PDATA SIZE       =   ----    ----
-C51 COMPILER V9.60.0.0   MAIN                                                              09/11/2022 21:46:48 PAGE 2   
-
-   DATA SIZE        =   ----       5
-   IDATA SIZE       =   ----    ----
-   BIT SIZE         =   ----    ----
-END OF MODULE INFORMATION.
-
-
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  5 WARNING(S),  4 ERROR(S)

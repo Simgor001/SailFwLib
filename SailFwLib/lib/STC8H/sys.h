@@ -4,7 +4,7 @@
  ****************************************************************/
 #ifndef __SL_SYS_H__
 #define __SL_SYS_H__
-#include "type.h"
+#include "sl_type.h"
 #include "sl_config.h"
 
 /**
