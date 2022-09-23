@@ -29,6 +29,7 @@ init函数是基本的配置函数，主要确保低端型号的芯片能正常�
 | LOG_INFO  | I    | 运行消息 |
 | LOG_WARN  | W    | 警告     |
 | LOG_ERROR | E    | 错误     |
+
 如果想启用日志功能，请在`sl_config.h`文件头部，添加宏`#define SL_LOG`。
 :warning: 注意：该功能会占用串口1！
 
