@@ -94,11 +94,11 @@
 #define Trig_Fall 1 /*下降沿触发*/
 
 /**
- * @brief 配置外部中断
+ * @brief 初始化外部中断
  * @param INT_x 外部中断号
  * @param Trig_x 外部中断类型
  */
-#define sl_isr_exti_config(INT_x, Trig_x) _##INT_x##_IT(Trig_x);
+#define sl_isr_exti_init(INT_x, Trig_x) _##INT_x##_IT(Trig_x);
 
 /**
  * @brief 开启外部中断
