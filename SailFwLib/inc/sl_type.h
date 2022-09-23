@@ -15,6 +15,8 @@ typedef long int32_t;
 
 #ifdef __SDCC
 #define bit __bit
+#else
+#include "intrins.h"
 #endif // __SDCC
 
 #endif

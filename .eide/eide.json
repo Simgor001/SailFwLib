@@ -20,7 +20,7 @@
   "targets": {
     "Debug": {
       "excludeList": [],
-      "toolchain": "SDCC",
+      "toolchain": "Keil_C51",
       "compileConfig": {
         "options": "null"
       },

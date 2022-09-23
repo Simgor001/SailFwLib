@@ -21,9 +21,9 @@
         TMOD &= (~0x80); \
         TMOD |= x << 7;  \
     }
-#define _TIM_2_GATE(x) sl_log_warn(x, "The TIM2 cannot set GATE flag! ")
-#define _TIM_3_GATE(x) sl_log_warn(x, "The TIM3 cannot set GATE flag! ")
-#define _TIM_4_GATE(x) sl_log_warn(x, "The TIM4 cannot set GATE flag! ")
+#define _TIM_2_GATE(x) sl_log_info("The TIM2 has no GATE flag. ")
+#define _TIM_3_GATE(x) sl_log_info("The TIM3 has no GATE flag. ")
+#define _TIM_4_GATE(x) sl_log_info("The TIM4 has no GATE flag. ")
 
 #define CT_Timer       0 //定时器
 #define CT_Count       1 //计数器
@@ -68,9 +68,9 @@
         TMOD &= (~0x30); \
         TMOD |= x << 4;  \
     }
-#define _TIM_2_Mode(x)  sl_log_warn(x, "The TIM2 cannot set Mode flag! ")
-#define _TIM_3_Mode(x)  sl_log_warn(x, "The TIM3 cannot set Mode flag! ")
-#define _TIM_4_Mode(x)  sl_log_warn(x, "The TIM4 cannot set Mode flag! ")
+#define _TIM_2_Mode(x)  sl_log_info("The TIM2 has no Mode flag.")
+#define _TIM_3_Mode(x)  sl_log_info("The TIM3 has no Mode flag. ")
+#define _TIM_4_Mode(x)  sl_log_info("The TIM4 has no Mode flag. ")
 
 #define TIM_Isr_Disable 0 //禁用定时器中断
 #define TIM_Isr_Enable  1 //启用定时器中断
@@ -194,8 +194,8 @@
 #define _TIM_4_H         T4H
 #define _TIM_4_L         T4L
 
-#define _TIM_0_Mode_Flag (TMOD & 0x03) == 1
-#define _TIM_1_Mode_Flag (TMOD & 0x30) == 1
+#define _TIM_0_Mode_Flag (TMOD & 0x02)
+#define _TIM_1_Mode_Flag (TMOD & 0x20)
 #define _TIM_2_Mode_Flag 0
 #define _TIM_3_Mode_Flag 0
 #define _TIM_4_Mode_Flag 0
@@ -215,22 +215,22 @@
         }                                          \
     }
 
-#define _TIM_0_Speed_Flag (AUXR & 0x80) == 1
-#define _TIM_1_Speed_Flag (AUXR & 0x40) == 1
-#define _TIM_2_Speed_Flag (AUXR & 0x04) == 1
-#define _TIM_3_Speed_Flag (T4T3M & 0x02) == 1
-#define _TIM_4_Speed_Flag (T4T3M & 0x20) == 1
+#define _TIM_0_Speed_Flag (AUXR & 0x80)
+#define _TIM_1_Speed_Flag (AUXR & 0x40)
+#define _TIM_2_Speed_Flag (AUXR & 0x04)
+#define _TIM_3_Speed_Flag (T4T3M & 0x02)
+#define _TIM_4_Speed_Flag (T4T3M & 0x20)
 
 static uint16_t _TIM_load_count = 0;
 //按微秒装载
-#define sl_tim_load(TIM_x, us)                           \
-    {                                                    \
-        if (_##TIM_x##_Speed_Flag)                       \
-            _TIM_load_count = us * (FOSC / 12000000L);   \
-        else                                             \
-            _TIM_load_count = us * (FOSC / 1000000L);    \
-        _##TIM_x##_H = (65536 - _TIM_load_count) >> 8;   \
-        _##TIM_x##_L = (65536 - _TIM_load_count) & 0xFF; \
+#define sl_tim_load(TIM_x, us)                            \
+    {                                                     \
+        if (_##TIM_x##_Speed_Flag)                        \
+            _TIM_load_count = us * ((FOSC / 12000000.0)); \
+        else                                              \
+            _TIM_load_count = us * ((FOSC / 1000000.0));  \
+        _##TIM_x##_H = (65536 - _TIM_load_count) >> 8;    \
+        _##TIM_x##_L = (65536 - _TIM_load_count) & 0xFF;  \
     }
 
 #define _TIM_0_EN  TR0 = 1;
@@ -252,15 +252,15 @@ static uint16_t _TIM_load_count = 0;
 
 #define _TIM_0_Flag           TF0
 #define _TIM_1_Flag           TF1
-#define _TIM_2_Flag           (sl_log(LOG_WARN, "The TIM2 cannot check ISR flag! "), 0)
-#define _TIM_3_Flag           (sl_log(LOG_WARN, "The TIM3 cannot check ISR flag! "), 0)
-#define _TIM_4_Flag           (sl_log(LOG_WARN, "The TIM4 cannot check ISR flag! "), 0)
+#define _TIM_2_Flag           (sl_log_warn("The TIM2 cannot check ISR flag! "), 0)
+#define _TIM_3_Flag           (sl_log_warn("The TIM3 cannot check ISR flag! "), 0)
+#define _TIM_4_Flag           (sl_log_warn("The TIM4 cannot check ISR flag! "), 0)
 
 #define _TIM_0_Reset_Flag     TF0 = 0;
 #define _TIM_1_Reset_Flag     TF1 = 0;
-#define _TIM_2_Reset_Flag     sl_log(LOG_WARN, "The TIM2 cannot reset ISR flag! ");
-#define _TIM_3_Reset_Flag     sl_log(LOG_WARN, "The TIM3 cannot reset ISR flag! ");
-#define _TIM_4_Reset_Flag     sl_log(LOG_WARN, "The TIM4 cannot reset ISR flag! ");
+#define _TIM_2_Reset_Flag     sl_log_warn("The TIM2 cannot reset ISR flag! ");
+#define _TIM_3_Reset_Flag     sl_log_warn("The TIM3 cannot reset ISR flag! ");
+#define _TIM_4_Reset_Flag     sl_log_warn("The TIM4 cannot reset ISR flag! ");
 
 //检查溢出中断标志位
 #define sl_tim_flag(TIM_x) _##TIM_x##_Flag

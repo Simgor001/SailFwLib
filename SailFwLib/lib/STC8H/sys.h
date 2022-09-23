@@ -7,8 +7,12 @@
 #include "sl_type.h"
 #include "sl_config.h"
 
+
 /**
  * @brief 初始化系统
  */
 void sl_sys_init();
+
+void sl_delay(uint32_t ms);
+void sl_delay_us(uint16_t us);
 #endif

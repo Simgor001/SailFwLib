@@ -45,5 +45,5 @@
 #include "gpio.h"
 #include "isr.h"
 #include "tim.h"
-
+#include "uart.h"
 #endif
