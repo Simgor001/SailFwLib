@@ -3,8 +3,7 @@
   "type": "C51",
   "dependenceList": [],
   "srcDirs": [
-    "User",
-    "SailFwLib"
+    "User"
   ],
   "virtualFolder": {
     "name": "<virtual_root>",
@@ -20,7 +19,7 @@
   "targets": {
     "Debug": {
       "excludeList": [],
-      "toolchain": "Keil_C51",
+      "toolchain": "SDCC",
       "compileConfig": {
         "options": "null"
       },

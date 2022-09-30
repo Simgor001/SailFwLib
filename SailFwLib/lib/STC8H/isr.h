@@ -69,7 +69,7 @@
 #define INT_4        4
 
 #define _INT_0_IT(x) (IT0 = x)
-#define _INT_1_IT(x) (IT1 = x）
+#define _INT_1_IT(x) (IT1 = x)
 #define _INT_2_IT(x) sl_log(LOG_WARN, "The INT2 cannot set IT flag! ")
 #define _INT_3_IT(x) sl_log(LOG_WARN, "The INT3 cannot set IT flag! ")
 #define _INT_4_IT(x) sl_log(LOG_WARN, "The INT4 cannot set IT flag! ")
@@ -104,11 +104,7 @@
  * @brief 开启外部中断
  * @param INT_x 外部中断号
  */
-#define sl_isr_exti_enable(INT_x) \
-    {                             \
-        EA = 1;                   \
-        _##INT_x##_EN;            \
-    }
+#define sl_isr_exti_enable(INT_x)  _##INT_x##_EN;
 
 #define sl_isr_exti_disable(INT_x) _##INT_x##_DIS;
 

@@ -58,7 +58,7 @@ void sl_sys_init()
 
 #ifdef SL_LOG
     //初始化SL_LOG
-    sl_uart_init(UART_1, UART_Mode_VBR_8, UART_Multi_Disable);
+    sl_uart_init(UART_1, UART_Mode_VBR_8, UART_Multi_Disable, UART_ISR_Disable);
     sl_uart_config(UART_1, TIM_1);
     sl_tim_init(TIM_1, GATE_Disable, CT_Timer, TIM_Mode_8_Auto, TIM_Isr_Disable);
     sl_tim_config(TIM_1, TIM_Speed_1T, TIM_Clk_Out_Disable);

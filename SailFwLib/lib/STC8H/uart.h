@@ -12,15 +12,14 @@
 #define UART_Mode_CBR_9    (2 << 6) //固定波特率9位数据
 #define UART_Mode_VBR_9    (3 << 6) //可变波特率9位数据
 
-#define UART_Multi_Disable 0 //禁用多机通信
-#define UART_Multi_Enable  1 //启用多机通信
+#define UART_Multi_Disable 0        //禁用多机通信
+#define UART_Multi_Enable  (1 << 5) //启用多机通信
 
-#define sl_uart_init(UART_x, UART_Mode_x, UART_Multi_x) \
-    {                                                   \
-        UART_x = 0x08;                                  \
-        UART_x |= UART_Mode_x;                          \
-        UART_x |= (UART_Multi_x << 5);                  \
-    }
+#define UART_ISR_Disable   0        //禁用串口接收中断
+#define UART_ISR_Enable    (1 << 4) //启用串口接收中断
+
+//需要设置GPIO模式
+#define sl_uart_init(UART_x, UART_Mode_x, UART_Multi_x, UART_ISR_x) UART_x = (UART_Mode_x | UART_Multi_x | UART_ISR_x);
 
 #define _UART_1_TIM_0                                       \
     {                                                       \
@@ -80,12 +79,25 @@
         S4CON &= (~0x40);                                   \
         sl_log(LOG_WARN, "TIM3 cannot be used by UART3! "); \
     }
-#define _UART_4_TIM_4                 S4CON |= 0x40;
+#define _UART_4_TIM_4 S4CON |= 0x40;
 
 //配置串口
 #define sl_uart_config(UART_x, TIM_x) _##UART_x##_##TIM_x;
 
 //设置波特率
-#define sl_uart_set_baud(UART_x,baud)
+#define sl_uart_set_baud(UART_x, baud)
+
+//数据是否到达
+#define sl_uart_available(UART_x) (UART_x & 0x01)
+
+//复位接收标识
+#define sl_uart_reset_rx(UART_x) (UART_x &= (~0x01))
+
+#define _UART_1_Buf              SBUF
+#define _UART_2_Buf              S2BUF
+#define _UART_3_Buf              S3BUF
+#define _UART_4_Buf              S4BUF
+//读串口数据
+#define sl_uart_read(UART_x) _##UART_x##_Buf
 
 #endif // !_SL_UART_H_

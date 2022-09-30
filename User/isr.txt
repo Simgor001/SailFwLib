@@ -1,0 +1,49 @@
+#include "sl_config.h"
+//声明中断服务
+// sl_isr_state(Time0, IRQ_TIM0);
+
+// //定义中断服务
+// sl_isr_def(Time0, IRQ_TIM0)
+// {
+//     //翻转电平
+//     sl_gpio_toggle(GPIO_P3, GPIO_Pin_2);
+// }
+
+sl_isr_state(int0, IRQ_INT0);
+
+sl_isr_def(int0, IRQ_INT0)
+{
+    sl_gpio_toggle(GPIO_P1, GPIO_Pin_2);
+}
+
+void main()
+{
+    //初始化系统
+    sl_sys_init();
+
+    //初始化GPIO
+    sl_gpio_init(GPIO_P1, GPIO_Pin_2, GPIO_Mode_Out_PP);
+    sl_gpio_init(GPIO_P1, GPIO_Pin_3, GPIO_Mode_Out_PP);
+
+    //中断
+    sl_gpio_init(GPIO_P3, GPIO_Pin_2, GPIO_Mode_In);
+    sl_gpio_write(GPIO_P3, GPIO_Pin_2, HIGH);
+    sl_isr_exti_init(INT_0, Trig_Fall);
+    sl_isr_exti_enable(INT_0);
+
+    // K2
+    sl_gpio_init(GPIO_P3, GPIO_Pin_4, GPIO_Mode_In);
+    sl_gpio_write(GPIO_P3, GPIO_Pin_4, HIGH);
+
+    while (1)
+    {
+        sl_gpio_toggle(GPIO_P1, GPIO_Pin_3);
+        sl_delay(100);
+        if (sl_gpio_read(GPIO_P3, GPIO_Pin_4) == 0)
+        {
+            sl_delay(10);
+            if (sl_gpio_read(GPIO_P3, GPIO_Pin_4) == 0)
+                sl_power_down();
+        }
+    }
+}

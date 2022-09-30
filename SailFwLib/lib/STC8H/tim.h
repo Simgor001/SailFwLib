@@ -203,13 +203,10 @@
 //按周期装载
 #define sl_tim_load_cycle(TIM_x, cycle)            \
     {                                              \
-        if (_##TIM_x##_Mode_Flag)                  \
-        {                                          \
-            _##TIM_x##_H = 256 - cycle;            \
-            _##TIM_x##_L = 256 - cycle;            \
-        }                                          \
-        else                                       \
-        {                                          \
+        if (_##TIM_x##_Mode_Flag) {                \
+            _##TIM_x##_H = (uint8_t)(256 - cycle); \
+            _##TIM_x##_L = (uint8_t)(256 - cycle); \
+        } else {                                   \
             _##TIM_x##_H = (65536 - cycle) >> 8;   \
             _##TIM_x##_L = (65536 - cycle) & 0xFF; \
         }                                          \

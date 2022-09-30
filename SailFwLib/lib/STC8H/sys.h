@@ -15,4 +15,9 @@ void sl_sys_init();
 
 void sl_delay(uint32_t ms);
 void sl_delay_us(uint16_t us);
+
+//进入掉电模式
+#define sl_power_down() PCON |= 0x02
+//进入睡眠（空闲）模式
+#define sl_power_sleep() PCON |= 0x01
 #endif

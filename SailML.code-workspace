@@ -20,7 +20,10 @@
             "*.cc": "cpp",
             "STC8H.H": "cpp",
             "STDIO.H": "cpp",
-            "INTRINS.H": "cpp"
+            "INTRINS.H": "cpp",
+            "STDARG.H": "cpp",
+            "SYS.C": "cpp",
+            "UART.C": "cpp"
         },
         "[yaml]": {
             "editor.insertSpaces": true,
